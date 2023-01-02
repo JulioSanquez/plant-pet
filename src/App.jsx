@@ -56,7 +56,7 @@ const sheets = google.sheets('v4');
       try {
         const response = (await sheets.spreadsheets.values.get(request)).data;
         // TODO: Change code below to process the `response` object:
-        console.log(JSON.stringify(response, null, 2));
+        console.log(response);
       } catch (err) {
         console.error(err);
       }
