@@ -1,6 +1,7 @@
 import './App.css'
 import {google} from 'googleapis'
 import { useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
 
@@ -53,13 +54,9 @@ const sheets = google.sheets('v4');
         auth: authClient,
       };
   
-      try {
-        const response = (await sheets.spreadsheets.values.get(request)).data;
-        // TODO: Change code below to process the `response` object:
-        console.log(response);
-      } catch (err) {
-        console.error(err);
-      }
+      axios.get(sheets.spreadsheets.values.get(request))
+        .then( ({data}) => console.log(data) )
+        .catch( err => {console.log(data); console.log("Salio un Error Carnal")} )
     }
     main();
   }, [])
