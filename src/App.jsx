@@ -11,6 +11,12 @@ function App() {
   }  
 
   useEffect(() => {
+    window.process = {
+      ...window.process,
+    };
+  }, []);
+
+  useEffect(() => {
     const getSome = async () =>{
       const doc = new GoogleSpreadsheet('1ltPRJdt_KdFI5tuHmfXMvq571Xx2FQAdbOCLvN-jvgc');
       
@@ -41,12 +47,7 @@ function App() {
     
   },[])
 
-
-  
-
   return (
-
-    
     <div className="App">
       <button id="signin-button" onClick={handleClick}>Leer datos</button>
     </div>
