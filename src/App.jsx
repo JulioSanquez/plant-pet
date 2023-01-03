@@ -9,11 +9,37 @@ function App() {
   }  
 
   useEffect(() => {
+    const getSome = async () =>{
+      const doc = new GoogleSpreadsheet('1ltPRJdt_KdFI5tuHmfXMvq571Xx2FQAdbOCLvN-jvgc');
+      
+      const auth = new GoogleAuth({
+        scopes: 'https://www.googleapis.com/auth/spreadsheets',
+      });
+      
+      const credentials = await auth.getClient();
+      
+      doc.useServiceAccountAuth(credentials, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log('Auth success');
+          doc.getInfo((error, info) => {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log(info.title);
+              console.log(info.author.email);
+            }
+          });
+        }
+      });
+    }
+
+    getSome()
     
-      axios.get("https://sheet.best/api/sheets/b84ff152-9edf-4731-9241-73beccd90047")
-        .then( ({data}) => console.log(data) )
-        .catch( err => {console.log(data); console.log("Salio un Error Carnal")} )
-  }, [])
+  },[])
+
+
   
 
   return (
